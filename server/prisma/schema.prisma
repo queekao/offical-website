@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    // prisma generate
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model user {
+    id               String      @id @unique @default(uuid())
+    email            String      @unique
+    password         String
+    confirmationCode String      @unique @db.Char(255)
+    status           user_status @default(PENDING)
+}
+
+// one to one relationship
+model news {
+    id         Int       @id @default(autoincrement())
+    title      String    @unique @db.Char(50)
+    image      String
+    created_at DateTime  @default(now())
+    content    content[] @relation("news")
+}
+
+model rich_block {
+    id         Int       @id @default(autoincrement())
+    title      String    @unique @db.Char(50)
+    image      String
+    created_at DateTime  @default(now())
+    content    content[] @relation("rich")
+}
+
+model treeman_block {
+    id         Int       @id @default(autoincrement())
+    title      String    @unique @db.Char(50)
+    image      String
+    created_at DateTime  @default(now())
+    content    content[] @relation("treeman")
+}
+
+model content {
+    id           Int            @id @default(autoincrement())
+    image        Json?
+    title        String         @unique @db.Char(50)
+    content      String         @db.Text
+    newsTitle    String?
+    news         news?          @relation("news", fields: [newsTitle], references: [title], onDelete: Cascade, onUpdate: Cascade)
+    richTitle    String?
+    rich         rich_block?    @relation("rich", fields: [richTitle], references: [title], onDelete: Cascade, onUpdate: Cascade)
+    treemanTitle String?
+    treeman      treeman_block? @relation("treeman", fields: [treemanTitle], references: [title], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model video_block {
+    id                  Int                   @id @default(autoincrement())
+    title               String                @unique @db.Char(50)
+    poster              String
+    created_at          DateTime              @default(now())
+    video_block_content video_block_content[]
+}
+
+model video_block_content {
+    id            Int         @id @default(autoincrement())
+    video_url     Json
+    title         String      @unique @db.Char(50)
+    content       String?     @db.Text
+    video_blockId Int
+    video         video_block @relation(fields: [video_blockId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+// one to one relationship
+
+model about {
+    id        String @id @unique @default(uuid())
+    title     String
+    video_url String
+    card      card[] @relation("about")
+}
+
+model feedback {
+    id    String @id @unique @default(uuid())
+    title String
+    card  card[] @relation("feedback")
+}
+
+model service {
+    id    String @id @unique @default(uuid())
+    title String
+    card  card[] @relation("service")
+}
+
+model card {
+    id         Int       @id @default(autoincrement())
+    image      String?   @unique
+    content    String    @db.Text
+    aboutId    String?
+    about      about?    @relation("about", fields: [aboutId], references: [id])
+    feedbackId String?
+    feedback   feedback? @relation("feedback", fields: [feedbackId], references: [id])
+    serviceId  String?
+    service    service?  @relation("service", fields: [serviceId], references: [id])
+}
+
+model QnA {
+    id       Int           @id @default(autoincrement())
+    generic  question_type @default(LOAN)
+    question String        @db.Text
+    answer   String        @db.Text
+}
+
+model contact {
+    id         String   @id @default(uuid())
+    created_at DateTime @default(now())
+    name       String
+    line       String
+    phone      String
+    content    String   @db.Text
+
+    @@index([created_at])
+}
+
+enum question_type {
+    LOAN
+    PARTTIME
+}
+
+enum user_status {
+    PENDING
+    ACTIVE
+}

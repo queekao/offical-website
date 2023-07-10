@@ -1,0 +1,12 @@
+client/node_modules
+server/node_modules
+
+client/package-lock.json
+server/package-lock.json
+server/admin/package-lock.json
+dist
+.DS_sotre
+.vscode
+*.env
+*.env.dev
+*.env.prod
