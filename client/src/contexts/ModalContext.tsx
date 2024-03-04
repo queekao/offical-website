@@ -4,6 +4,15 @@ import { Props } from '../types'
 
 export const ModelContext = createContext<ModalType>({
   isModalOpen: false,
+  isAboutModal: false,
+  isServiceModal: false,
+  isFeedbackModal: false,
+  isContactModal: false,
+  isQnaModal: false,
+  isNewsModal: false,
+  isTreemanModal: false,
+  isRichModal: false,
+  isVideoModal: false,
   setModalOpen: () => {}
 })
 // this <Props> is for defining the type of component

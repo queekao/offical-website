@@ -69,13 +69,13 @@ export class VideoContentRoutes {
   ): Promise<void> => {
     try {
       const { video_url, content, title } = req.body
-      console.log(video_url)
-
       // for (let i = 0; i < video_url?.length; i++) {
 
       // }
+      const regex =
+        /^https?:\/\/(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{11})$/
       const videoKey = video_url.split('/')[4]
-      if (!videoKey) {
+      if (!video_url.match(regex) || !videoKey) {
         res.status(400).send({ message: '請輸入正確的影片連結' })
         return
       }

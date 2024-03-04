@@ -166,3 +166,22 @@ export class QnARoutes {
     return QnARoutes.instance.router
   }
 }
+// import axios from 'axios'
+
+// async function getObjectFromCloudFront(url: string): Promise<void> {
+//   try {
+//     const response = await axios.get(url, {
+//       responseType: 'stream' // or 'arraybuffer' for binary data like images
+//     })
+
+//     // Handle the response data
+//     // For example, you can pipe it to a file, process it, etc.
+//     response.data.pipe(/* your destination */)
+//   } catch (error) {
+//     console.error('Error fetching object from CloudFront:', error)
+//   }
+// }
+
+// // Use the function
+// const cloudFrontUrl = 'https://<distribution-id>.cloudfront.net/your-object-key'
+// getObjectFromCloudFront(cloudFrontUrl)

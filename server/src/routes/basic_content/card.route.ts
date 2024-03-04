@@ -61,7 +61,6 @@ export class CardRoutes {
           return
         }
         const uploadImage = (req.file as Express.MulterS3.File)?.key
-        console.log(uploadImage)
         const uniqueContent = await this.prisma[this.table].findFirst({
           select: { id: true }
         })

@@ -9,15 +9,14 @@ export const useAxios = (path: string, method: string, formData?: any) => {
   const payload = new FormData()
 
   useEffect(() => {
-    // const abortController = new AbortController()
+    const abortController = new AbortController()
     const fetchData = async () => {
       try {
-        console.log('one')
         const response = await axios({
           url: `${import.meta.env.VITE_API_URL}/${path}`,
           method: method,
-          data: formData ? payload : ''
-          // signal: abortController.signal
+          data: formData ? payload : '',
+          signal: abortController.signal
         })
 
         setDatas(response.data)
@@ -28,9 +27,11 @@ export const useAxios = (path: string, method: string, formData?: any) => {
         setLoading(false)
       }
     }
+    fetchData()
     return () => {
-      // abortController.abort()
-      fetchData()
+      if (datas && !loading) {
+        abortController.abort()
+      }
     }
   }, [])
 

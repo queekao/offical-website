@@ -1,0 +1,11 @@
+# Use the official MySQL image as the base image
+FROM mysql:latest
+
+# Set the environment variables for the MySQL database
+ENV MYSQL_DATABASE=umbrella
+ENV MYSQL_HOST=mysql 
+ENV MYSQL_ROOT_PASSWORD=password
+ENV MYSQL_RANDOM_ROOT_PASSWORD=no
+ENV MYSQL_ALLOW_EMPTY_PASSWORD=no
+# Expose the default MySQL port
+EXPOSE 3307

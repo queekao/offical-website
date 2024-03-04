@@ -1,0 +1,43 @@
+# FROM node:16 AS build
+# WORKDIR /app
+# COPY ./server/package*.json ./
+# # RUN npm ci --production
+# RUN npm install
+# RUN npm install -g typescript
+# COPY ./server .
+# RUN npm run build
+# Stage 2: Create the production image
+# FROM --platform=linux/arm64 arm64v8/node:16.20 this is for arm64
+# x86_64
+FROM --platform=linux/amd64 node:16 AS production 
+WORKDIR /app
+# COPY --from=build /app/package.json /app/package-lock.json ./
+# COPY --from=build /app/dist ./dist
+COPY ./server/package*.json /app/
+COPY ./server/dist ./dist
+COPY ./server/prisma /app/prisma
+COPY ./server/.env.prod /app/
+RUN npm ci --production
+RUN npm install nodemon dotenv-cli
+CMD ["npm", "run", "start:migrate:prod"]
+# Specify the base image
+# FROM node:18.16.0
+
+# Set the working directory
+# WORKDIR /usr/src/app
+
+# # Copy package.json and package-lock.json (if using npm)
+# COPY ./server/package*.json ./
+
+# # Install dependencies
+# RUN npm ci
+
+# RUN npm install nodemon
+# # Copy the rest of the application code
+# COPY ./server .
+
+# # Expose the port the server will listen on
+# EXPOSE 3030
+
+# # Set the command to run when the container starts
+# CMD ["npm","run","prod"]

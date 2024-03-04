@@ -10,3 +10,5 @@ dist
 *.env
 *.env.dev
 *.env.prod
+umbrella_local.sql
+EC2Key.pem

@@ -10,9 +10,8 @@ if (process.env.NODE_ENV === 'development') {
 } else if (process.env.NODE_ENV === 'production') {
   dotenv.config({ path: '.env.prod' })
 }
-console.log(process.env.NODE_ENV)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const PORT = 5173
+const PORT = 5174
 const HOST = '0.0.0.0' // accept local and network
 async function createServer(isProd = process.env.NODE_ENV === 'production') {
   const app = express()
@@ -34,7 +33,7 @@ async function createServer(isProd = process.env.NODE_ENV === 'production') {
       if (!isProd) {
         // always read fresh template in dev
         template = fs.readFileSync(
-          path.resolve(__dirname, 'index.html'),
+          path.resolve(__dirname, './index.html'),
           'utf-8'
         )
         render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render // this render method is from entry-server.tsx

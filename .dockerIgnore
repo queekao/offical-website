@@ -1,0 +1,10 @@
+.vscode
+# .dockerignore
+
+client/src/
+server/src/
+server/admin/
+client/node_modules
+server/node_modules
+src
+EC2Key.pem

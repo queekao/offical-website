@@ -10,6 +10,7 @@ import errorHandler from 'errorhandler'
 import swaggerJsDoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
 import { options } from './models'
+import cookieParser from 'cookie-parser'
 
 dotenv.config({
   path: process.env.NODE_ENV === 'development' ? '.env.dev' : '.env.prod'
@@ -45,6 +46,8 @@ export class Server {
     this.app.use(helmet())
     this.app.use(bodyParser.json({ limit: '50mb' }))
     this.app.use(bodyParser.urlencoded({ extended: false }))
+    this.app.use(cookieParser())
+
     this.app.use(morgan('dev'))
     const limiter = rateLimit({
       max: 100,
@@ -62,6 +65,7 @@ export class Server {
   private routes(): void {
     // use router middleware
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+
     /**
      * @swagger
      * /news:

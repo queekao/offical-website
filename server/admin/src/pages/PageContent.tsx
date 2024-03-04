@@ -8,17 +8,12 @@ import { useState } from 'react'
 import PutAndPostFormModal from '../components/PutAndPostFormModal'
 function PageContent() {
   const params = useParams()
-  const [page, setPage] = useState<number>(0)
   const [basicModal, setBasicModal] = useState(false)
   const showFormModal = () => {
     setBasicModal(!basicModal)
   }
   const { path } = params
-  const { datas, axiosError, loading } = useAxios(
-    `${path}${page > 0 ? `?page=${page}` : ''}`,
-    'get'
-  )
-
+  const { datas, axiosError, loading } = useAxios(`${path}`, 'get')
   // if (path === 'card') {
   //   console.log('hello')
 

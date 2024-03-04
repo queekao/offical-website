@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" /> -->
@@ -11,46 +11,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>umbrella</title>
-    <style>
-      *,
-      html,
-      body {
-        margin: 0;
-        font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-          'Droid Sans', 'Helvetica Neue', sans-serif;
-        padding: 0;
-        border: 0;
-        font-size: 62.5%;
-        letter-spacing: 0.03em;
-        vertical-align: baseline;
-        box-sizing: border-box;
-      }
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      p {
-        margin: 0;
-        font-weight: normal;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-      :root {
-        --black: #141414;
-        --bp-largest: 75em; /* 1200px */
-        --bp-large: 62.5em; /* 1000px */
-        --bp-medium: 50em; /* 800px; */
-        --bp-small: 37.5em; /* 600px; */
-      }
-    </style>
   </head>
   <body>
     <div id="root"><!--ssr-outlet--></div>
-    <script type="module" src="/src/entry-client.tsx"></script>
+    <script type="module" src="/src/entry-client.tsx">
+      // document.cookie = "cookieName=cookieValue; SameSite=Strict";
+    </script>
   </body>
 </html>

@@ -5,12 +5,12 @@ import path from 'path'
 // Load the environment variables from the appropriate .env file
 const config: UserConfig = {
   plugins: [reactRefresh()],
-  assetsInclude: ['**/*.gltf'],
+  assetsInclude: ['**/*.glb'],
   build: {
     outDir: 'dist',
-    rollupOptions: {
-      input: 'src/entry-client.tsx' // Replace with the actual entry point file
-    },
+    // rollupOptions: {
+    //   input: 'src/entry-client.tsx'
+    // },
     // sourcemap: true,
     cssCodeSplit: true,
     minify: 'terser',

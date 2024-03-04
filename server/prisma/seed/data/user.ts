@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import { Prisma } from '@prisma/client'
 
 const salt = bcrypt.genSaltSync(10)
-const password = ['AwsVerygood8998', 'xeriok92599']
+const password = ['AwsVerygood8998@', 'xeriok92599']
 const hashedPassword1 = bcrypt.hashSync(password[0], salt)
 const hashedPassword2 = bcrypt.hashSync(password[1], salt)
 
@@ -16,7 +16,7 @@ for (let i = 0; i < 25; i++) {
 }
 export const userData: Prisma.userCreateInput[] = [
   {
-    email: 'adfreetwad@gmai.com',
+    email: 'adfreetwad@gmail.com',
     password: hashedPassword1,
     confirmationCode: token1
   },
